@@ -21,6 +21,7 @@ onMounted(async () => {
         `https://api.chucknorris.io/jokes/search?query=${curentCategory.value}`,
     );
     const json = await itemsRes.json();
+    console.log(json);
     currentData.value = json.result;
 });
 </script>

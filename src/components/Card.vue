@@ -4,19 +4,15 @@ const props = defineProps({
     data: Object,
     currentCategory: String,
 });
-
-onMounted(() => {
-    console.log(data, currentCategory);
-});
 </script>
 <template>
     <div
-        class="border-2 border-gray-300 bg-white flex grid-cols-12 gap-3 p-3 pr-5 relative"
+        class="border-2 border-gray-300 bg-white flex gap-3 p-3 pr-5 relative items-center"
     >
-        <div class="col-span-3">
-            <img :src="data.icon_url" alt="" />
+        <div class="w-[30%]">
+            <img :src="data.icon_url" class="w-full" alt="" />
         </div>
-        <div class="col-span-9">
+        <div class="w-[70%]">
             <div class="text-2xl text-red-500 font-bold">
                 {{ currentCategory }}
             </div>
@@ -25,12 +21,21 @@ onMounted(() => {
                     {{ new Date(data.created_at).toLocaleString() }}
                 </div></small
             >
-            <ul>
+            <ul class="flex flex-col gap-1 text-xs">
+                <li class="flex">
+                    <span><img class="h-4 w-7" src="/tag.webp" alt="" /></span
+                    >ID: {{ data.id }}
+                </li>
+                <li class="flex">
+                    <span><img class="h-4 w-7" src="/tag.webp" alt="" /></span
+                    >Updated: {{ new Date(data.updated_at).toLocaleString() }}
+                </li>
                 <li class="flex items-center gap-1">
-                    <span><img class="h-4" src="/tag.webp" alt="" /></span
-                    >something something
+                    <span><img class="h-4 w-7" src="/tag.webp" alt="" /></span
+                    >{{ data.value.slice(0, 50) }}
                 </li>
             </ul>
+            cla
         </div>
         <div class="absolute bottom-3 right-3 text-orange-400">
             <svg
