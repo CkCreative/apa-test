@@ -35,7 +35,6 @@ const props = defineProps({
                     >{{ data.value.slice(0, 50) }}
                 </li>
             </ul>
-            cla
         </div>
         <div class="absolute bottom-3 right-3 text-orange-400">
             <svg
