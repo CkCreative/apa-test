@@ -3,10 +3,10 @@ import Card from "./components/Card.vue";
 import { onMounted, ref } from "vue";
 const categories = ref([]);
 const currentData = ref([]);
-const curentCategory = ref("animal");
+const currentCategory = ref("animal");
 
 async function getItemsForCategory(category) {
-    curentCategory.value = category;
+    currentCategory.value = category;
     const res = await fetch(
         `https://api.chucknorris.io/jokes/search?query=${category}`,
     );
@@ -18,7 +18,7 @@ onMounted(async () => {
     const res = await fetch("https://api.chucknorris.io/jokes/categories");
     categories.value = await res.json();
     const itemsRes = await fetch(
-        `https://api.chucknorris.io/jokes/search?query=${curentCategory.value}`,
+        `https://api.chucknorris.io/jokes/search?query=${currentCategory.value}`,
     );
     const json = await itemsRes.json();
     console.log(json);
@@ -27,9 +27,11 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="bg-slate-200 min-h-screen">
-        <div class="container p-2 md:px-10">
-            <div class="flex gap-3 flex-wrap mb-5 md:mb-5 justify-center">
+    <div class="bg-slate-200 min-h-screen flex items-center justify-center">
+        <div class="container px-5 md:px-10">
+            <div
+                class="flex gap-3 flex-wrap mb-5 md:mb-5 justify-center md:justify-between"
+            >
                 <template v-for="category in categories">
                     <div
                         @click="getItemsForCategory(category)"
@@ -40,7 +42,9 @@ onMounted(async () => {
                 </template>
             </div>
 
-            <div class="flex flex-wrap gap-5 justify-center">
+            <div
+                class="flex flex-col md:flex-row flex-wrap gap-5 justify-center md:justify-between"
+            >
                 <template v-for="item in currentData">
                     <Card :currentCategory="currentCategory" :data="item" />
                 </template>
